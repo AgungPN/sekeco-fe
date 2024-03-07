@@ -1,4 +1,5 @@
 superkasirfrontend\ListMitra.class
+superkasirfrontend\Product$2.class
 kasirfrontend\LoginKasirPage$1.class
 Action\PanelAction.class
 superkasirfrontend\SuperKasirFrontend.class
@@ -12,6 +13,7 @@ superkasirfrontend\DsbSAdmin$2.class
 superkasirfrontend\inputBarang$1.class
 Action\table.class
 kasirfrontend\KasirHomePage$6.class
+superkasirfrontend\Purchase$1.class
 kasirfrontend\KasirHomePage$4.class
 kasirfrontend\LoginKasirPage$3.class
 Action\ActionButton.class
@@ -21,14 +23,17 @@ Test\test$1.class
 kasirfrontend\KasirHomePage$9.class
 superkasirfrontend\inputMitra$1.class
 superkasirfrontend\ListBarang.class
+superkasirfrontend\inputMitra$2.class
 kasirfrontend\KasirHomePage.class
 kasirfrontend\KasirHomePage$8.class
 kasirfrontend\LoginKasirPage$2.class
 Action\TableActionCellRender.class
 kasirfrontend\KasirHomePage$3.class
+superkasirfrontend\Product$1.class
 kasirfrontend\KasirHomePage$1.class
 superkasirfrontend\ListBarang$2.class
 kasirfrontend\KasirPaymentPage.class
+superkasirfrontend\Product.class
 kasirfrontend\LoginKasirPage.class
 kasirfrontend\table.class
 kasirfrontend\KasirHomePage$5.class
@@ -38,4 +43,5 @@ superkasirfrontend\ListMitra$2.class
 superkasirfrontend\DsbSAdmin$1.class
 Test\test.class
 superkasirfrontend\DsbSAdmin$3.class
+superkasirfrontend\Purchase.class
 superkasirfrontend\SuperKasirFrontend$1.class
