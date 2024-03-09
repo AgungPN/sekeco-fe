@@ -33,8 +33,11 @@ kasirfrontend\KasirPaymentPage$1.class
 kasirfrontend\KasirHomePage$10.class
 kasirfrontend\KasirHomePage$7.class
 superkasirfrontend\ListMitra$1.class
+superkasirfrontend\invoice.class
+superkasirfrontend\Purchase$3.class
 kasirfrontend\KasirHomePage$4.class
 superkasirfrontend\inputMitra.class
+superkasirfrontend\invoice$2.class
 Test\test$1.class
 superkasirfrontend\inputMitra$1.class
 superkasirfrontend\ListBarang.class
@@ -44,6 +47,7 @@ superkasirfrontend\Mitra.class
 kasirfrontend\LoginKasirPage.class
 kasirfrontend\table.class
 superkasirfrontend\DsbSAdmin.class
+superkasirfrontend\invoice$1.class
 superkasirfrontend\DsbSAdmin$1.class
 Test\test.class
 superkasirfrontend\Purchase.class
