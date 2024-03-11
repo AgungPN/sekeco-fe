@@ -64,8 +64,6 @@ public class DsbSAdmin extends javax.swing.JFrame {
             }
         });
 
-        Profile.setIcon(new javax.swing.ImageIcon("C:\\Users\\Rosemary\\Pictures\\img\\user.png")); // NOI18N
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -182,7 +180,7 @@ public class DsbSAdmin extends javax.swing.JFrame {
 
         jLabel2.setText("PRODUCT");
 
-        btnProduct.setIcon(new javax.swing.ImageIcon("C:\\Users\\Rosemary\\Pictures\\img\\product.png")); // NOI18N
+        btnProduct.setIcon(new javax.swing.ImageIcon("D:\\Folder Baru (2)\\src\\main\\java\\img\\product.png")); // NOI18N
         btnProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProductActionPerformed(evt);
@@ -212,7 +210,7 @@ public class DsbSAdmin extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        btnMitra.setIcon(new javax.swing.ImageIcon("C:\\Users\\Rosemary\\Pictures\\img\\mitra.png")); // NOI18N
+        btnMitra.setIcon(new javax.swing.ImageIcon("D:\\Folder Baru (2)\\src\\main\\java\\img\\mitra.png")); // NOI18N
         btnMitra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMitraActionPerformed(evt);
@@ -246,7 +244,7 @@ public class DsbSAdmin extends javax.swing.JFrame {
 
         jLabel4.setText("REKAP");
 
-        btnRekap.setIcon(new javax.swing.ImageIcon("C:\\Users\\Rosemary\\Pictures\\img\\rekap.png")); // NOI18N
+        btnRekap.setIcon(new javax.swing.ImageIcon("D:\\Folder Baru (2)\\src\\main\\java\\img\\rekap.png")); // NOI18N
         btnRekap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRekapActionPerformed(evt);
@@ -334,7 +332,7 @@ public class DsbSAdmin extends javax.swing.JFrame {
                     .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77))
         );

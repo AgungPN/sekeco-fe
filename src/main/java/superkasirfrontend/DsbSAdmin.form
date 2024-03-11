@@ -79,7 +79,7 @@
                       <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
                       <Component id="jPanel6" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="174" max="32767" attributes="0"/>
+                  <EmptySpace pref="46" max="32767" attributes="0"/>
                   <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
               </Group>
@@ -137,11 +137,6 @@
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="Profile">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\Rosemary\Pictures\img\user.png"/>
-                </Property>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -371,7 +366,7 @@
                 <Component class="javax.swing.JButton" name="btnProduct">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="C:\Users\Rosemary\Pictures\img\product.png"/>
+                      <Image iconType="2" name="D:\Folder Baru (2)\src\main\java\img\product.png"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -413,7 +408,7 @@
                 <Component class="javax.swing.JButton" name="btnMitra">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="C:\Users\Rosemary\Pictures\img\mitra.png"/>
+                      <Image iconType="2" name="D:\Folder Baru (2)\src\main\java\img\mitra.png"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -463,7 +458,7 @@
                 <Component class="javax.swing.JButton" name="btnRekap">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="C:\Users\Rosemary\Pictures\img\rekap.png"/>
+                      <Image iconType="2" name="D:\Folder Baru (2)\src\main\java\img\rekap.png"/>
                     </Property>
                   </Properties>
                   <Events>
