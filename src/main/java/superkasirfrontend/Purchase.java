@@ -225,7 +225,7 @@ public class Purchase extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelPurc, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -279,6 +279,12 @@ public class Purchase extends javax.swing.JFrame {
             }
         });
 
+        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField11ActionPerformed(evt);
+            }
+        });
+
         jTextField14.setEnabled(false);
 
         javax.swing.GroupLayout PanelExistingLayout = new javax.swing.GroupLayout(PanelExisting);
@@ -322,7 +328,7 @@ public class Purchase extends javax.swing.JFrame {
                         .addComponent(btnAddProductExi)
                         .addGap(27, 27, 27)
                         .addComponent(btnCancelExi, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelExistingLayout.setVerticalGroup(
             PanelExistingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -358,7 +364,7 @@ public class Purchase extends javax.swing.JFrame {
                 .addGroup(PanelExistingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddProductExi, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelExi, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabAddProduct.addTab("tab1", PanelExisting);
@@ -424,7 +430,7 @@ public class Purchase extends javax.swing.JFrame {
                         .addComponent(btnAddProdNew, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
                         .addComponent(btnCancelNew, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         PanelNewProductLayout.setVerticalGroup(
             PanelNewProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -469,22 +475,21 @@ public class Purchase extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(198, 198, 198))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tabAddProduct)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 864, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(113, 113, 113))
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(1166, 1166, 1166))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tabAddProduct, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(41, 41, 41)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 989, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -499,8 +504,8 @@ public class Purchase extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tabAddProduct))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tabAddProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE))
                     .addComponent(jScrollPane1)))
         );
 
@@ -516,43 +521,47 @@ public class Purchase extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1CaretPositionChanged
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        //button for back to Product file
-        this.setVisible(false);
-        this.dispose();
-         Product ProductFrame = new Product();
-    ProductFrame.setVisible(true);
-    }//GEN-LAST:event_btnBackActionPerformed
+    private void btnExistingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExistingActionPerformed
+        // TODO add your handling code here:
+        tabAddProduct.setVisible(true);
+        tabAddProduct.setSelectedIndex(1);
+    }//GEN-LAST:event_btnExistingActionPerformed
 
     private void btnNewPurchaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewPurchaseActionPerformed
         // TODO add your handling code here:
         tabAddProduct.setVisible(true);
-    tabAddProduct.setSelectedIndex(0);
+        tabAddProduct.setSelectedIndex(0);
     }//GEN-LAST:event_btnNewPurchaseActionPerformed
 
     private void btnCancelNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelNewActionPerformed
         // TODO add your handling code here:
-         tabAddProduct.setVisible(false);
-    tabAddProduct.remove(0); // Menghapus tab untuk pembelian baru
-    tabAddProduct.remove(0);
+        tabAddProduct.setVisible(false);
+        tabAddProduct.remove(0); // Menghapus tab untuk pembelian baru
+        tabAddProduct.remove(0);
     }//GEN-LAST:event_btnCancelNewActionPerformed
-
-    private void btnExistingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExistingActionPerformed
-        // TODO add your handling code here:
-         tabAddProduct.setVisible(true);
-    tabAddProduct.setSelectedIndex(1);
-    }//GEN-LAST:event_btnExistingActionPerformed
 
     private void btnCancelExiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelExiActionPerformed
         // TODO add your handling code here:
         tabAddProduct.setVisible(false);
-    tabAddProduct.remove(0); // Menghapus tab untuk pembelian baru
-    tabAddProduct.remove(0);
+        tabAddProduct.remove(0); // Menghapus tab untuk pembelian baru
+        tabAddProduct.remove(0);
     }//GEN-LAST:event_btnCancelExiActionPerformed
 
     private void btnAddProductExiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductExiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAddProductExiActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        //button for back to Product file
+        this.setVisible(false);
+        this.dispose();
+        Product ProductFrame = new Product();
+        ProductFrame.setVisible(true);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField11ActionPerformed
 
     /**
      * @param args the command line arguments
