@@ -5,68 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8a3fa3e-ef3d-4d26-983a-df59025d8f78" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/skeco-fe.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/9/19e0f39e718c476f5eb7a4eb6aced7c5bc3f2589" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/4/442292b8a7efeabbe4cc176709b833b1792140ec" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/a/4ad9e9bdce1c14d2b1b8f500f6c6976ee73c28e4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/1/9/19e0f39e718c476f5eb7a4eb6aced7c5bc3f2589" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/4/4/442292b8a7efeabbe4cc176709b833b1792140ec" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/4/a/4ad9e9bdce1c14d2b1b8f500f6c6976ee73c28e4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fesekecho.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jshell.history" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/unknown/binary/AbsoluteLayout/SNAPSHOT/AbsoluteLayout-SNAPSHOT.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/unknown/binary/RojeruSan.parte1/SNAPSHOT/RojeruSan.parte1-SNAPSHOT.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nb-configuration.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Action/ActionButton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Action/PanelAction.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Action/PanelAction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Action/TableActionCellRender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Action/icons8-edit-row-25.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Action/icons8-tick-25.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Action/icons8-x-25.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Action/table.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Test/test.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Test/test.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/auth/LoginKasirPage.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/auth/LoginKasirPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/img/back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/img/mitra.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/img/product.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/img/rekap.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/img/user.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kasirfrontend/KasirHomePage.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kasirfrontend/KasirHomePage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kasirfrontend/table.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/superkasirfrontend/ListMitra.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/superkasirfrontend/ListMitra.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/superkasirfrontend/Mitra.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/superkasirfrontend/Mitra.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/superkasirfrontend/SuperKasirFrontend.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/superkasirfrontend/SuperKasirFrontend.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/superkasirfrontend/invoice.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/superkasirfrontend/invoice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/superkasirfrontend/recap/RecapPurchase1.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/superkasirfrontend/recap/RecapPurchase1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/superkasirfrontend/DsbSAdmin.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/superkasirfrontend/DsbSAdmin.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/superkasirfrontend/DsbSAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/superkasirfrontend/DsbSAdmin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/superkasirfrontend/Product.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/superkasirfrontend/Product.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/superkasirfrontend/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/superkasirfrontend/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/superkasirfrontend/Purchase.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/superkasirfrontend/Purchase.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/superkasirfrontend/Purchase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/superkasirfrontend/Purchase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/superkasirfrontend/inputBarang.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/superkasirfrontend/inputBarang.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/superkasirfrontend/inputBarang.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/superkasirfrontend/inputBarang.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Test/test.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Test/test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/superkasirfrontend/recap/RecapPurchase1.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/superkasirfrontend/recap/RecapPurchase1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +40,7 @@
     "git-widget-placeholder": "Merging main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/sekecho/sekeco-fe",
+    "last_opened_file_path": "C:/Users/Rosemary/Documents/NetBeansProjects/Kasir/sekeco-fe",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -128,7 +74,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1709373970237</updated>
-      <workItem from="1710208465773" duration="402000" />
+      <workItem from="1710208465773" duration="1775000" />
     </task>
     <servers />
   </component>
