@@ -8,6 +8,14 @@ import javax.swing.JOptionPane;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import dtos.auth.LoginDTO;
+import dtos.auth.LoginResponse;
+import helpers.Auth;
+import views.MitraMenu.Mitra;
+import views.kasirfrontend.HomePageKasir;
+import web.Http;
+import helpers.Message;
+
 /**
  *
  * @author Rosemary
@@ -39,6 +47,7 @@ public class Login extends javax.swing.JFrame {
         PsswdLogin = new javax.swing.JPasswordField();
         showPasswd = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -151,16 +160,25 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_inpUsernameActionPerformed
 
     private void BtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLoginActionPerformed
-        // TODO add your handling code here:
-        // untuk tombool LOGIN
-        if (inpUsername.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "Masukan Username ");
-        }
-        else if (PsswdLogin.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "Masukan Password");
-        }
-        else {
-            JOptionPane.showMessageDialog(null, "Masukan Username dan Password yang benar!", "Message", JOptionPane.ERROR_MESSAGE);
+        Http https = new Http();
+        LoginResponse loginResponse = https.post("auth/login", LoginDTO.builder()
+                .username(inpUsername.getText())
+                .password(new String(PsswdLogin.getPassword()))
+                .build(), LoginResponse.class);
+
+        Auth.setLogin(loginResponse);
+
+        if (https.isSuccess()) {
+            if (Auth.isAdmin()) {
+                this.dispose();
+                (new Mitra()).setVisible(true); // TODO: change this to the main menu of admin
+            } else {
+                this.dispose();
+                (new HomePageKasir()).setVisible(true);
+            }
+        } else {
+            // TODO: doesn't care reason of failed login. Just show error message
+            Message.error("Username Or Password Wrong", "Login Failed");
         }
     }//GEN-LAST:event_BtnLoginActionPerformed
 
@@ -171,8 +189,8 @@ public class Login extends javax.swing.JFrame {
     private void showPasswdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPasswdActionPerformed
         // TODO add your handling code here:
         // bagian show password
-        if (showPasswd.isSelected()){
-            PsswdLogin.setEchoChar((char)0);
+        if (showPasswd.isSelected()) {
+            PsswdLogin.setEchoChar((char) 0);
         } else {
             PsswdLogin.setEchoChar('*');
         }
