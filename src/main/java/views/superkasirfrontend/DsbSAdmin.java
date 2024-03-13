@@ -4,6 +4,10 @@
  */
 package views.superkasirfrontend;
 
+import views.MitraMenu.Mitra;
+import views.RekapMenu.Rekap;
+import views.auth.Login;
+
 /**
  *
  * @author Rosemary
@@ -350,6 +354,10 @@ public class DsbSAdmin extends javax.swing.JFrame {
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        this.dispose();
+        Login login = new Login();
+        login.setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductActionPerformed
@@ -369,7 +377,10 @@ public class DsbSAdmin extends javax.swing.JFrame {
 
     private void btnRekapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRekapActionPerformed
         // TODO add your handling code here:
-        String pathToFile = "src/main/java/RekapMenu/Rekap.java";
+        this.setVisible(false);
+        this.dispose();
+        Rekap rekap = new Rekap();
+        rekap.setVisible(true);
         
        
     }//GEN-LAST:event_btnRekapActionPerformed

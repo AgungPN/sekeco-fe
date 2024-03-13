@@ -49,7 +49,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jTextField5" pref="342" max="32767" attributes="0"/>
+                          <Component id="jTextField5" pref="540" max="32767" attributes="0"/>
                           <Component id="jTextField6" max="32767" attributes="0"/>
                           <Component id="jTextField7" max="32767" attributes="0"/>
                           <Component id="jTextField1" max="32767" attributes="0"/>
@@ -108,7 +108,7 @@
               </Group>
               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
               <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="49" max="32767" attributes="0"/>
+              <EmptySpace pref="195" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -172,9 +172,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Back"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
       </Events>

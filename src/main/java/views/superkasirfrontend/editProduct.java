@@ -63,7 +63,6 @@ public class editProduct extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setText("Edit Product");
 
-        jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -99,7 +98,7 @@ public class editProduct extends javax.swing.JFrame {
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
                             .addComponent(jTextField6)
                             .addComponent(jTextField7)
                             .addComponent(jTextField1)
@@ -145,7 +144,7 @@ public class editProduct extends javax.swing.JFrame {
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addComponent(jButton2)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(195, Short.MAX_VALUE))
         );
 
         pack();
