@@ -1,12 +1,12 @@
-package dtos;
 
-import lombok.Data;
+package dtos.tour;
 
 import java.util.Date;
+import lombok.Data;
 
 @Data
-public class Supplier {
-    private Long supplierId;
+public class Tour {
+    private Long tourId;
     private String name;
     private String address;
     private String phone;

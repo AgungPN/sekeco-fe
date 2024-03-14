@@ -1,5 +1,6 @@
-package dtos;
+package dtos.supplier;
 
+import dtos.PaginateResponse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

@@ -1,23 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package views.MitraMenu;
 
-import dtos.Supplier;
-import dtos.Suppliers;
+import dtos.supplier.Supplier;
+import dtos.supplier.Suppliers;
 import web.Http;
 
 import javax.swing.table.DefaultTableModel;
 
-/**
- * @author Lenovo
- */
 public class PanelSupplier extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PanelSupplier
-     */
+
     public PanelSupplier() {
         initComponents();
         setTable();

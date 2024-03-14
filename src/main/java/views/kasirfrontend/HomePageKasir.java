@@ -4,12 +4,15 @@
  */
 package views.kasirfrontend;
 
-import java.awt.Component;
+import dtos.invoiceTour.InvoiceTour;
+import dtos.invoiceTour.InvoiceTours;
+import dtos.supplier.Supplier;
+import dtos.supplier.Suppliers;
+import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import web.Http;
 
 /**
  *
@@ -23,44 +26,45 @@ public class HomePageKasir extends javax.swing.JFrame {
     public HomePageKasir() {
        initComponents();
         
-        testData();
+//        addDataInRow();
+        cb_tour();
     }
     
-    
-    private void testData(){
+    private void cb_tour(){
+        Http http = new Http();
+        InvoiceTours invoiceTours = http.sendGetRequest("invoice/tour/status?status=NOW", InvoiceTours.class);
+        if(invoiceTours != null && invoiceTours.getContent() != null){
+        for(InvoiceTour invoiceTour : invoiceTours.getContent()){
+            //cb_selectTour.addItem(invoiceTour.getTourId().getName());
+            System.out.println(invoiceTour.getIncome());
+        }}
+        else{
+            System.out.println(invoiceTours);
+        }
         
-        Table.getColumnModel().getColumn(3).setCellEditor(new QtyCellEditor(new EventCellInputChange() {
-            @Override
-            public void inputChanged() {
-               sumAmount();
-            }
-        }));
-         Table.getColumnModel().getColumn(3).setCellRenderer(new DefaultTableCellRenderer(){
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-               
-                super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-                 setHorizontalAlignment(SwingConstants.CENTER);
-                return this;
-            }
-            
-         
-             
-         });
-         
-         
-        DefaultTableModel model = (DefaultTableModel) Table.getModel();
-        model.addRow(new ModelItemSell(1, "Keripik Singkong", 1, 10000, 0).toTableRow(Table.getRowCount() + 1));
-        model.addRow(new ModelItemSell(2, "Bakpia Cokelat", 1, 25000, 0).toTableRow(Table.getRowCount() + 1));
-        model.addRow(new ModelItemSell(3, "Paru Goreng", 1, 5000, 0).toTableRow(Table.getRowCount() + 1));
-        model.addRow(new ModelItemSell(4, "Manisan Bandung", 1, 75000, 0).toTableRow(Table.getRowCount() + 1));
-        model.addRow(new ModelItemSell(5, "Jadah", 1, 50000, 0).toTableRow(Table.getRowCount() + 1));
-       sumAmount();
+    }
+    
+    private void addDataInRow(){
+        Http http = new Http();
+        Suppliers suppliers = http.sendGetRequest("suppliers", Suppliers.class);
+
+        // Example set table from data API
+        String[] fields = new String[]{"Supplier_Id", "Name", "Addres", "Telephone"};
+        DefaultTableModel list = new DefaultTableModel(null, fields);
+        for (Supplier supplier : suppliers.getContent()) {
+            list.addRow(new Object[]{
+                    supplier.getSupplierId(),
+                    supplier.getName(),
+                    supplier.getAddress(),
+                    supplier.getPhone()
+            });
+        }
+        tb_order.setModel(list);
     }
      private void sumAmount() {
         int total = 0;
-        for (int i = 0; i < Table.getRowCount(); i++) {
-            ModelItemSell item = (ModelItemSell) Table.getValueAt(i, 0);
+        for (int i = 0; i < tb_order.getRowCount(); i++) {
+            ModelItemSell item = (ModelItemSell) tb_order.getValueAt(i, 0);
             total += item.getTotal();
         }
          DecimalFormat df = new DecimalFormat("Rp #,##0.00");
@@ -78,19 +82,19 @@ public class HomePageKasir extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        Table = new javax.swing.JTable();
+        tb_order = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cb_selectTour = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        tf_barcode = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
@@ -103,7 +107,7 @@ public class HomePageKasir extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Table.setModel(new javax.swing.table.DefaultTableModel(
+        tb_order.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -111,19 +115,22 @@ public class HomePageKasir extends javax.swing.JFrame {
                 "Data", "Barcode", "Nama Barang", "Qty", "Harga", "Sub Total", "Aksi"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Long.class, java.lang.Long.class, java.lang.Object.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, true, true, true, true, true
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(Table);
-        if (Table.getColumnModel().getColumnCount() > 0) {
-            Table.getColumnModel().getColumn(0).setMinWidth(0);
-            Table.getColumnModel().getColumn(0).setMaxWidth(0);
-        }
+        jScrollPane1.setViewportView(tb_order);
 
         jPanel1.setBackground(new java.awt.Color(200, 191, 173));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -140,7 +147,11 @@ public class HomePageKasir extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cb_selectTour.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_selectTourActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -158,7 +169,7 @@ public class HomePageKasir extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cb_selectTour, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
         );
         jPanel1Layout.setVerticalGroup(
@@ -169,7 +180,7 @@ public class HomePageKasir extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel4)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_selectTour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -186,9 +197,9 @@ public class HomePageKasir extends javax.swing.JFrame {
 
         jLabel7.setText("Nama Barang");
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+        tf_barcode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tf_barcodeKeyPressed(evt);
             }
         });
 
@@ -219,7 +230,7 @@ public class HomePageKasir extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tf_barcode, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -231,7 +242,7 @@ public class HomePageKasir extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tf_barcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -358,10 +369,6 @@ public class HomePageKasir extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
     private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5ActionPerformed
@@ -371,6 +378,32 @@ public class HomePageKasir extends javax.swing.JFrame {
         KasirPaymentPage paymentPage = new KasirPaymentPage();
     paymentPage.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_BtnBayarActionPerformed
+
+    private void tf_barcodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_barcodeKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            Http http = new Http();
+            Suppliers suppliers = http.sendGetRequest("suppliers", Suppliers.class);
+
+            // Example set table from data API
+            String[] fields = new String[]{"Supplier_Id", "Name", "Addres", "Telephone"};
+            DefaultTableModel list = new DefaultTableModel(null, fields);
+            for (Supplier supplier : suppliers.getContent()) {
+                list.addRow(new Object[]{
+                        supplier.getSupplierId(),
+                        supplier.getName(),
+                        supplier.getAddress(),
+                        supplier.getPhone()
+                });
+            }
+            
+            tb_order.setModel(list);
+        }
+    }//GEN-LAST:event_tf_barcodeKeyPressed
+
+    private void cb_selectTourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_selectTourActionPerformed
+        
+        
+    }//GEN-LAST:event_cb_selectTourActionPerformed
 
     /**
      * @param args the command line arguments
@@ -410,10 +443,9 @@ public class HomePageKasir extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBayar;
     private javax.swing.JLabel GrandTotal;
-    private javax.swing.JTable Table;
+    private javax.swing.JComboBox<String> cb_selectTour;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -428,8 +460,9 @@ public class HomePageKasir extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JTable tb_order;
+    private javax.swing.JTextField tf_barcode;
     // End of variables declaration//GEN-END:variables
 }
