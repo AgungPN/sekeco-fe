@@ -4,6 +4,11 @@
  */
 package views.superkasirfrontend;
 
+import javax.swing.table.DefaultTableModel;
+
+import dtos.product.ProductsPagination;
+import web.Http;
+
 /**
  *
  * @author Rosemary
@@ -15,8 +20,31 @@ public class Product extends javax.swing.JFrame {
      */
     public Product() {
         initComponents();
+        setTable();
     }
 
+    public void setTable() {
+        Http http = new Http();
+        ProductsPagination products = http.sendGetRequest("products", ProductsPagination.class);
+
+        // Example set table from data API
+        String[] fields = new String [] {
+                "No", "Barcode", "Nama Barang", "Harga Beli", "Harga Jual", "Profit Sharing Amount", "Stok"};
+        DefaultTableModel list = new DefaultTableModel(null, fields);
+        for (dtos.product.Product product : products.getContent()) {
+            list.addRow(new Object[]{
+                    product.getProductId(),
+                    product.getBarcode(),
+                    product.getName(),
+                    product.getPrice(),
+                    product.getPrice(), //TODO : tambahkan harga beli
+                    product.getProfitSharingAmount(),
+                    product.getStock()
+                    
+            });
+        }
+        tableProduct.setModel(list);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,15 +81,7 @@ public class Product extends javax.swing.JFrame {
             new String [] {
                 "No", "Barcode", "Nama Barang", "Harga Beli", "Harga Jual", "Profit Sharing Amount", "Stok"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        ));
         tableProduct.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 tableProductPropertyChange(evt);

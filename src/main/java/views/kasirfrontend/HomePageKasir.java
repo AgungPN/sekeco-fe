@@ -2,7 +2,6 @@ package views.kasirfrontend;
 
 import dtos.invoiceTour.InvoiceTour;
 import dtos.invoiceTour.InvoiceTours;
-import dtos.product.Products;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -10,9 +9,9 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+
+import dtos.product.ProductsApi;
 import web.Http;
 
 public class HomePageKasir extends javax.swing.JFrame {
@@ -37,7 +36,7 @@ public class HomePageKasir extends javax.swing.JFrame {
     
     private void addProductInRow(){
         Http http = new Http();
-        Products products = http.sendGetRequest("products/barcode?barcode=" + tf_barcode.getText(), Products.class);
+        ProductsApi products = http.sendGetRequest("products/barcode?barcode=" + tf_barcode.getText(), ProductsApi.class);
         int rowIndex = isFieldInRow(products.getData().getBarcode());
         if(rowIndex >= 0){
             int currentQty = (int)tb_order.getValueAt( rowIndex, 2) + 1;

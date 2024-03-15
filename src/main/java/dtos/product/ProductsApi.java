@@ -6,6 +6,6 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class Products extends ApiResponse{
+public class ProductsApi extends ApiResponse {
     private Product data;
 }
