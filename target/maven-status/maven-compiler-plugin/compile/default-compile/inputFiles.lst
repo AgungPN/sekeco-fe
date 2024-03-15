@@ -1,4 +1,5 @@
 D:\Project\Java\Spring Boot\skeco-fe\src\main\java\views\superkasirfrontend\Purchase.java
+D:\Project\Java\Spring Boot\skeco-fe\src\main\java\dtos\product\Product.java
 D:\Project\Java\Spring Boot\skeco-fe\src\main\java\dtos\auth\LoginDTO.java
 D:\Project\Java\Spring Boot\skeco-fe\src\main\java\views\kasirfrontend\ModelItemSell.java
 D:\Project\Java\Spring Boot\skeco-fe\src\main\java\Action\PanelAction.java
@@ -13,6 +14,8 @@ D:\Project\Java\Spring Boot\skeco-fe\src\main\java\Action\table.java
 D:\Project\Java\Spring Boot\skeco-fe\src\main\java\views\MitraMenu\AddSupplier.java
 D:\Project\Java\Spring Boot\skeco-fe\src\main\java\Action\TableActionCellRender.java
 D:\Project\Java\Spring Boot\skeco-fe\src\main\java\views\RekapMenu\Rekap.java
+D:\Project\Java\Spring Boot\skeco-fe\src\main\java\dtos\ApiResponse.java
+D:\Project\Java\Spring Boot\skeco-fe\src\main\java\dtos\SingleSample.java
 D:\Project\Java\Spring Boot\skeco-fe\src\main\java\views\kasirfrontend\KasirPaymentPage.java
 D:\Project\Java\Spring Boot\skeco-fe\src\main\java\views\MitraMenu\ListMitra.java
 D:\Project\Java\Spring Boot\skeco-fe\src\main\java\views\kasirfrontend\QtyCellEditor.java
@@ -27,7 +30,6 @@ D:\Project\Java\Spring Boot\skeco-fe\src\main\java\EventCellInputChange.java
 D:\Project\Java\Spring Boot\skeco-fe\src\main\java\web\TypeResponse.java
 D:\Project\Java\Spring Boot\skeco-fe\src\main\java\views\MitraMenu\PanelCashier.java
 D:\Project\Java\Spring Boot\skeco-fe\src\main\java\views\MitraMenu\PanelTour.java
-D:\Project\Java\Spring Boot\skeco-fe\src\main\java\web\ApiResponse.java
 D:\Project\Java\Spring Boot\skeco-fe\src\main\java\dtos\tour\Tour.java
 D:\Project\Java\Spring Boot\skeco-fe\src\main\java\helpers\Message.java
 D:\Project\Java\Spring Boot\skeco-fe\src\main\java\views\kasirfrontend\KasirHomePage.java
@@ -37,6 +39,8 @@ D:\Project\Java\Spring Boot\skeco-fe\src\main\java\views\MitraMenu\AddTour.java
 D:\Project\Java\Spring Boot\skeco-fe\src\main\java\web\Http.java
 D:\Project\Java\Spring Boot\skeco-fe\src\main\java\helpers\Helpers.java
 D:\Project\Java\Spring Boot\skeco-fe\src\main\java\views\superkasirfrontend\DsbSAdmin.java
+D:\Project\Java\Spring Boot\skeco-fe\src\main\java\dtos\product\Products.java
+D:\Project\Java\Spring Boot\skeco-fe\src\main\java\dtos\MultiSample.java
 D:\Project\Java\Spring Boot\skeco-fe\src\main\java\views\MitraMenu\Mitra.java
 D:\Project\Java\Spring Boot\skeco-fe\src\main\java\enums\Status.java
 D:\Project\Java\Spring Boot\skeco-fe\src\main\java\views\MitraMenu\PanelSupplier.java

@@ -1,82 +1,112 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package views.kasirfrontend;
 
 import dtos.invoiceTour.InvoiceTour;
 import dtos.invoiceTour.InvoiceTours;
-import dtos.supplier.Supplier;
-import dtos.supplier.Suppliers;
+import dtos.product.Products;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
-import java.util.List;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import web.Http;
 
-/**
- *
- * @author Lenovo
- */
 public class HomePageKasir extends javax.swing.JFrame {
 
-    /**
-     * Creates new form HomePageKasir
-     */
+    String[] fields;
+    DefaultTableModel list;
     public HomePageKasir() {
        initComponents();
-        
-//        addDataInRow();
+       fields = new String[]{"Barcode", "Nama Barang", "Qty", "Harga","Sub Total", "Aksi"};
+       list = new DefaultTableModel(null, fields);
         cb_tour();
+        jam();
     }
     
     private void cb_tour(){
         Http http = new Http();
         InvoiceTours invoiceTours = http.sendGetRequest("invoice/tour/status?status=NOW", InvoiceTours.class);
-        if(invoiceTours != null && invoiceTours.getContent() != null){
-        for(InvoiceTour invoiceTour : invoiceTours.getContent()){
-            //cb_selectTour.addItem(invoiceTour.getTourId().getName());
-            System.out.println(invoiceTour.getIncome());
-        }}
-        else{
-            System.out.println(invoiceTours);
+        for(InvoiceTour invoiceTour : invoiceTours.getData()){
+            cb_selectTour.addItem(invoiceTour.getTourId().getName());
         }
-        
     }
     
-    private void addDataInRow(){
+    private void addProductInRow(){
         Http http = new Http();
-        Suppliers suppliers = http.sendGetRequest("suppliers", Suppliers.class);
-
-        // Example set table from data API
-        String[] fields = new String[]{"Supplier_Id", "Name", "Addres", "Telephone"};
-        DefaultTableModel list = new DefaultTableModel(null, fields);
-        for (Supplier supplier : suppliers.getContent()) {
+        Products products = http.sendGetRequest("products/barcode?barcode=" + tf_barcode.getText(), Products.class);
+        int rowIndex = isFieldInRow(products.getData().getBarcode());
+        if(rowIndex >= 0){
+            int currentQty = (int)tb_order.getValueAt( rowIndex, 2) + 1;
+            list.setValueAt(currentQty, rowIndex, 2);
+            list.setValueAt(currentQty * products.getData().getPrice(), rowIndex, 4);
+        }else{
             list.addRow(new Object[]{
-                    supplier.getSupplierId(),
-                    supplier.getName(),
-                    supplier.getAddress(),
-                    supplier.getPhone()
+                products.getData().getBarcode(),
+                products.getData().getName(),
+                1,
+                products.getData().getPrice(),
+                products.getData().getPrice()
             });
         }
         tb_order.setModel(list);
     }
-     private void sumAmount() {
-        int total = 0;
-        for (int i = 0; i < tb_order.getRowCount(); i++) {
-            ModelItemSell item = (ModelItemSell) tb_order.getValueAt(i, 0);
-            total += item.getTotal();
+    
+    private int isFieldInRow(String barcode){
+        for(int i = 0; i < tb_order.getRowCount(); i++){
+            if(barcode.equals(tb_order.getValueAt(i, 0))){
+                return i;
+            }
         }
-         DecimalFormat df = new DecimalFormat("Rp #,##0.00");
+        return -1;
+    }
+    
+     private void sumAmount() {
+        Long total = 0L;
+        for (int i = 0; i < tb_order.getRowCount(); i++) {
+            Long subTotal = (Long) tb_order.getValueAt(i, 4);
+            total += subTotal;
+        }
+        DecimalFormat df = new DecimalFormat("Rp #,##0.00");
         GrandTotal.setText(df.format(total));
      }
        
+    private void jam() {
+        try {
+            ActionListener taskPerformer = new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                String Vjam;
+                String noljam = "";
+                String nolmenit = "";
+                String noldetik = "";
+                Calendar dt = Calendar.getInstance();
+                int jam = dt.get(Calendar.HOUR_OF_DAY);
+                int menit = dt.get(Calendar.MINUTE);
+                int detik = dt.get(Calendar.SECOND);
+                if (jam < 10) {
+                    noljam = "0";
+                }
+                if (menit < 10) {
+                    nolmenit = "0";
+                }
+                if (detik < 10) {
+                    noldetik = "0";
+                }
+                String Sjam = noljam + Integer.toString(jam);
+                String Smenit = nolmenit + Integer.toString(menit);
+                String Sdetik = noldetik + Integer.toString(detik);
+                Vjam = Sjam + ":" + Smenit + ":" + Sdetik;
+                tf_waktu.setText(Vjam);
+            }};
+            new javax.swing.Timer(1000, taskPerformer).start();
+        } catch (Exception e) {
+            System.out.println("Error : " + e);
+        }
+    }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -87,16 +117,12 @@ public class HomePageKasir extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        tf_waktu = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         cb_selectTour = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         tf_barcode = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -112,24 +138,9 @@ public class HomePageKasir extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Data", "Barcode", "Nama Barang", "Qty", "Harga", "Sub Total", "Aksi"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Long.class, java.lang.Long.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, true, true, true, true, true
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(tb_order);
 
         jPanel1.setBackground(new java.awt.Color(200, 191, 173));
@@ -141,11 +152,11 @@ public class HomePageKasir extends javax.swing.JFrame {
 
         jLabel4.setText("Mitra");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
+        tf_waktu.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        tf_waktu.setEnabled(false);
+
+        jTextField2.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        jTextField2.setEnabled(false);
 
         cb_selectTour.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,7 +176,7 @@ public class HomePageKasir extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
+                    .addComponent(tf_waktu))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -179,13 +190,13 @@ public class HomePageKasir extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_waktu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cb_selectTour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(200, 191, 173));
@@ -193,19 +204,9 @@ public class HomePageKasir extends javax.swing.JFrame {
 
         jLabel5.setText("Barcode");
 
-        jLabel6.setText("Harga");
-
-        jLabel7.setText("Nama Barang");
-
         tf_barcode.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tf_barcodeKeyPressed(evt);
-            }
-        });
-
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
             }
         });
 
@@ -214,43 +215,24 @@ public class HomePageKasir extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel5)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(tf_barcode, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tf_barcode, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(14, 14, 14)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
-                        .addComponent(tf_barcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tf_barcode, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(217, 217, 217));
@@ -348,10 +330,10 @@ public class HomePageKasir extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -365,38 +347,27 @@ public class HomePageKasir extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
-
     private void BtnBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBayarActionPerformed
-        this.dispose();
-        KasirPaymentPage paymentPage = new KasirPaymentPage();
-    paymentPage.setVisible(true);        // TODO add your handling code here:
+        int totalItem = 0;
+        for(int i = 0; i < tb_order.getRowCount(); i++){
+            totalItem += (int) tb_order.getValueAt(i, 2);
+        }
+        NumberFormat format = NumberFormat.getInstance();
+        Number number = null;
+        try {
+            number = format.parse(GrandTotal.getText().replaceAll("[^\\d]", ""));
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+        Long total = number.longValue() / 100;
+        KasirPaymentPage paymentPage = new KasirPaymentPage(totalItem, total);
+        paymentPage.setVisible(true);  
     }//GEN-LAST:event_BtnBayarActionPerformed
 
     private void tf_barcodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_barcodeKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            Http http = new Http();
-            Suppliers suppliers = http.sendGetRequest("suppliers", Suppliers.class);
-
-            // Example set table from data API
-            String[] fields = new String[]{"Supplier_Id", "Name", "Addres", "Telephone"};
-            DefaultTableModel list = new DefaultTableModel(null, fields);
-            for (Supplier supplier : suppliers.getContent()) {
-                list.addRow(new Object[]{
-                        supplier.getSupplierId(),
-                        supplier.getName(),
-                        supplier.getAddress(),
-                        supplier.getPhone()
-                });
-            }
-            
-            tb_order.setModel(list);
+            addProductInRow();
+            sumAmount();
         }
     }//GEN-LAST:event_tf_barcodeKeyPressed
 
@@ -451,18 +422,14 @@ public class HomePageKasir extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTable tb_order;
     private javax.swing.JTextField tf_barcode;
+    private javax.swing.JTextField tf_waktu;
     // End of variables declaration//GEN-END:variables
 }

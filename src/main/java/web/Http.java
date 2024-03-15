@@ -49,10 +49,8 @@ public class Http {
         try {
             Gson gson = new Gson();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.body());
             Type responseType = TypeToken.getParameterized(clazz).getType();
             T apiResponse = gson.fromJson(response.body(), responseType);
-            System.out.println(apiResponse);
             isSuccess = response.statusCode() >= 200 && response.statusCode() < 300;
             return apiResponse;
         } catch (Exception e) {
