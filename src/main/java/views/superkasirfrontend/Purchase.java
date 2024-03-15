@@ -29,7 +29,7 @@ public class Purchase extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TablePurchase = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         labelSuplierName = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -86,7 +86,7 @@ public class Purchase extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TablePurchase.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -97,7 +97,7 @@ public class Purchase extends javax.swing.JFrame {
                 "No", "Barcode", "Nama Barang", "Harga Beli", "Harga Jual", "Profit Sharing Amount", "Stok", "Aksi"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(TablePurchase);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -602,6 +602,7 @@ public class Purchase extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> CmboboxSupName;
     private javax.swing.JPanel PanelExisting;
     private javax.swing.JPanel PanelNewProduct;
+    private javax.swing.JTable TablePurchase;
     private javax.swing.JButton btnAddProdNew;
     private javax.swing.JButton btnAddProductExi;
     private javax.swing.JButton btnBack;
@@ -634,7 +635,6 @@ public class Purchase extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
