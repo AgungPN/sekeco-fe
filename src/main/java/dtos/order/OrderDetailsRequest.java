@@ -1,9 +1,11 @@
-package dtos;
+package dtos.order;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class OrderDetails {
+@Builder
+public class OrderDetailsRequest {
     private Long productId;
     private Long profitSharingAmount;
     private Long price;

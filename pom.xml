@@ -27,7 +27,11 @@
             <artifactId>RojeruSan.parte1</artifactId>
             <version>SNAPSHOT</version>
         </dependency>
-
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>6.21.2</version>
+        </dependency>
         <dependency>
             <groupId>org.netbeans.external</groupId>
             <artifactId>AbsoluteLayout</artifactId>
@@ -45,6 +49,6 @@
         <!--  NOTE: change 17 to 21 if you want to change version of java -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <exec.mainClass>com.mycompany.fesekecho.Fesekecho</exec.mainClass>
-        <maven.compiler.release>21</maven.compiler.release>
+        <maven.compiler.release>17</maven.compiler.release>
     </properties>
 </project>

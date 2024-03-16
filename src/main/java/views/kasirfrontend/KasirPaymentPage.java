@@ -1,19 +1,39 @@
 package views.kasirfrontend;
 
+import dtos.order.OrderApi;
+import dtos.order.OrderRequest;
+import dtos.order.OrderResponse;
+import helpers.Message;
 import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRException;
+import print.ReportManager;
 import web.Http;
 
 public class KasirPaymentPage extends javax.swing.JFrame {
 
-    public KasirPaymentPage(int totalItem, Long total) {
+    OrderRequest orderRequest;
+    public KasirPaymentPage(OrderRequest order) {
         initComponents();
         setLocationRelativeTo(null);
-        tf_totalItem.setText(String.valueOf(totalItem));
-        tf_total.setText(String.valueOf(total));
+        tf_totalItem.setText(String.valueOf(order.getTotalItems()));
+        tf_total.setText(String.valueOf(order.getTotalPrice()));
+        orderRequest = order;
+        compileReport();
+    }
+    
+    private void compileReport(){
+        try {
+            ReportManager.getInstance().compileReport();
+        } catch (Exception e) {
+            Message.error(e.getMessage(), "Error");
+        }
     }
 
     private KasirPaymentPage() {
-        
+        initComponents();
+        compileReport();
     }
 
     @SuppressWarnings("unchecked")
@@ -226,12 +246,24 @@ public class KasirPaymentPage extends javax.swing.JFrame {
     private void tf_amountKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_amountKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             Long refund = Long.parseLong(tf_amount.getText()) - Long.parseLong(tf_total.getText());
-            tf_refund.setText(String.valueOf(refund));   
+            if(refund >= 0L){
+                tf_refund.setText(String.valueOf(refund));   
+                orderRequest.setAmount(Long.parseLong(tf_amount.getText()));
+                orderRequest.setRefund(refund);
+            }else{
+                Message.error("Uang Tidak Cukup!!", "Error");
+            }
         }
     }//GEN-LAST:event_tf_amountKeyPressed
 
     private void btn_printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_printActionPerformed
         Http http = new Http();
+        OrderApi orderApi = http.post("orders/save", orderRequest, OrderApi.class);
+        try {
+            ReportManager.getInstance().printReportPayment(orderApi.getData());
+        } catch (JRException ex) {
+            Logger.getLogger(KasirPaymentPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btn_printActionPerformed
 

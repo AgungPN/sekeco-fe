@@ -2,26 +2,32 @@ package views.kasirfrontend;
 
 import dtos.invoiceTour.InvoiceTour;
 import dtos.invoiceTour.InvoiceTours;
+import dtos.order.OrderDetailsRequest;
+import dtos.order.OrderRequest;
+import dtos.product.Product;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.Calendar;
 import javax.swing.table.DefaultTableModel;
 
 import dtos.product.ProductsApi;
+import java.util.ArrayList;
+import java.util.List;
 import web.Http;
 
 public class HomePageKasir extends javax.swing.JFrame {
 
     String[] fields;
     DefaultTableModel list;
+    List<Product> productList = new ArrayList<>();
+    List<InvoiceTour> invoiceTourList = new ArrayList<>();
     public HomePageKasir() {
        initComponents();
        fields = new String[]{"Barcode", "Nama Barang", "Qty", "Harga","Sub Total", "Aksi"};
        list = new DefaultTableModel(null, fields);
+       cb_selectTour.addItem("Person");
         cb_tour();
         jam();
     }
@@ -30,8 +36,33 @@ public class HomePageKasir extends javax.swing.JFrame {
         Http http = new Http();
         InvoiceTours invoiceTours = http.sendGetRequest("invoice/tour/status?status=NOW", InvoiceTours.class);
         for(InvoiceTour invoiceTour : invoiceTours.getData()){
+            invoiceTourList.add(invoiceTour);
             cb_selectTour.addItem(invoiceTour.getTourId().getName());
         }
+    }
+    
+    private List<OrderDetailsRequest> orderDetails(){
+        List<OrderDetailsRequest> list = new ArrayList<>();
+        for(int i = 0; i < tb_order.getRowCount(); i++){
+            OrderDetailsRequest details = OrderDetailsRequest.builder()
+                    .productId(productList.get(i).getProductId())
+                    .profitSharingAmount(productList.get(i).getProfitSharingAmount())
+                    .price(productList.get(i).getPrice())
+                    .quantity((int) tb_order.getValueAt(i, 2))
+                    .subtotal((Long) tb_order.getValueAt(i, 4))
+                    .build();
+            list.add(details);
+        }
+        return list;
+    }
+    
+    private Long invoiceTourId(){
+        for(int i = 0; i < invoiceTourList.size(); i++){
+            if(invoiceTourList.get(i).getTourId().getName().equals(cb_selectTour.getSelectedItem().toString())){
+                return invoiceTourList.get(i).getInvoiceTourId();
+            }
+        }
+        return null;
     }
     
     private void addProductInRow(){
@@ -43,6 +74,7 @@ public class HomePageKasir extends javax.swing.JFrame {
             list.setValueAt(currentQty, rowIndex, 2);
             list.setValueAt(currentQty * products.getData().getPrice(), rowIndex, 4);
         }else{
+            productList.add(products.getData());
             list.addRow(new Object[]{
                 products.getData().getBarcode(),
                 products.getData().getName(),
@@ -64,13 +96,12 @@ public class HomePageKasir extends javax.swing.JFrame {
     }
     
      private void sumAmount() {
-        Long total = 0L;
-        for (int i = 0; i < tb_order.getRowCount(); i++) {
-            Long subTotal = (Long) tb_order.getValueAt(i, 4);
-            total += subTotal;
-        }
+        Long totalPrice = list.getRowCount() > 0 ? list.getDataVector().stream()
+                .mapToLong(row -> (Long) row.elementAt(4))
+                .sum() : 0;
+        
         DecimalFormat df = new DecimalFormat("Rp #,##0.00");
-        GrandTotal.setText(df.format(total));
+        GrandTotal.setText(df.format(totalPrice));
      }
        
     private void jam() {
@@ -117,7 +148,7 @@ public class HomePageKasir extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         tf_waktu = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        tf_username = new javax.swing.JTextField();
         cb_selectTour = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -154,8 +185,8 @@ public class HomePageKasir extends javax.swing.JFrame {
         tf_waktu.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         tf_waktu.setEnabled(false);
 
-        jTextField2.setDisabledTextColor(new java.awt.Color(51, 51, 51));
-        jTextField2.setEnabled(false);
+        tf_username.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        tf_username.setEnabled(false);
 
         cb_selectTour.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,7 +205,7 @@ public class HomePageKasir extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                    .addComponent(tf_username, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                     .addComponent(tf_waktu))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
@@ -194,7 +225,7 @@ public class HomePageKasir extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -348,18 +379,21 @@ public class HomePageKasir extends javax.swing.JFrame {
 
     private void BtnBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBayarActionPerformed
         int totalItem = 0;
+        Long totalPrice = 0L;
         for(int i = 0; i < tb_order.getRowCount(); i++){
-            totalItem += (int) tb_order.getValueAt(i, 2);
+            totalItem += (int)tb_order.getValueAt(i, 2);
+            totalPrice += (Long)tb_order.getValueAt(i, 4);
         }
-        NumberFormat format = NumberFormat.getInstance();
-        Number number = null;
-        try {
-            number = format.parse(GrandTotal.getText().replaceAll("[^\\d]", ""));
-        } catch (ParseException ex) {
-            ex.printStackTrace();
-        }
-        Long total = number.longValue() / 100;
-        KasirPaymentPage paymentPage = new KasirPaymentPage(totalItem, total);
+        OrderRequest order = OrderRequest.builder()
+                .userId(1L)
+                .invoiceTourId(invoiceTourId())
+                .totalItems(totalItem)
+                .totalPrice(totalPrice)
+                .amount(0L)
+                .refund(0L)
+                .orderDetailsRequests(orderDetails())
+                .build();
+        KasirPaymentPage paymentPage = new KasirPaymentPage(order);
         paymentPage.setVisible(true);  
     }//GEN-LAST:event_BtnBayarActionPerformed
 
@@ -426,9 +460,9 @@ public class HomePageKasir extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTable tb_order;
     private javax.swing.JTextField tf_barcode;
+    private javax.swing.JTextField tf_username;
     private javax.swing.JTextField tf_waktu;
     // End of variables declaration//GEN-END:variables
 }
