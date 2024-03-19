@@ -121,9 +121,9 @@ public class PanelTour extends javax.swing.JPanel {
    
     
     // Menyembunyikan panel-panel lain
-    PanelMitraBox.pt.setVisible(false);
-    PanelMitraBox.ps.setVisible(false);
-     PanelMitraBox.pc.setVisible(false);
+    PanelMitraBox.panelTour.setVisible(false);
+    PanelMitraBox.panelSupplier.setVisible(false);
+     PanelMitraBox.panelCashier.setVisible(false);
     }//GEN-LAST:event_TombolTourAnyarMousePressed
 
 

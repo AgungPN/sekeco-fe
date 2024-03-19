@@ -4,6 +4,7 @@
  */
 package views.superkasirfrontend;
 
+import helpers.Auth;
 import views.MitraMenu.Mitra;
 import views.RekapMenu.Rekap;
 import views.auth.Login;
@@ -19,6 +20,11 @@ public class DsbSAdmin extends javax.swing.JFrame {
      */
     public DsbSAdmin() {
         initComponents();
+        if(!Auth.isAdmin()){
+            System.out.println("ROLE");
+            this.dispose();
+            (new Login()).setVisible(true);
+        }
     }
 
     /**

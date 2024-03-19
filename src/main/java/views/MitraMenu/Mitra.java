@@ -16,29 +16,29 @@ public class Mitra extends javax.swing.JFrame {
      * Creates new form Mitra
      */
     
-    PanelTour pt;
-    PanelSupplier ps;
-    PanelCashier pc;
+    PanelTour panelTour;
+    PanelSupplier panelSupplier;
+    PanelCashier panelCashier;
     
     public Mitra() {
         initComponents();
          setLocationRelativeTo(null);
         
 
-        pt = new PanelTour();
-        ps = new PanelSupplier();
-        pc = new PanelCashier();
+        panelTour = new PanelTour();
+        panelSupplier = new PanelSupplier();
+        panelCashier = new PanelCashier();
        
         
         
-        PanelMitraBox.add(pt);
-        PanelMitraBox.add(ps);
-        PanelMitraBox.add(pc);
+        PanelMitraBox.add(panelTour);
+        PanelMitraBox.add(panelSupplier);
+        PanelMitraBox.add(panelCashier);
      
         
-        pt.setVisible(false);
-        ps.setVisible(false);
-        pc.setVisible(false);
+        panelTour.setVisible(false);
+        panelSupplier.setVisible(false);
+        panelCashier.setVisible(false);
         
         
         
@@ -188,26 +188,26 @@ public class Mitra extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonTourMitraActionPerformed
 
     private void ButtonTourMitraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonTourMitraMousePressed
-        pt.setVisible(true);
-        ps.setVisible(false);
-        pc.setVisible(false);
+        panelTour.setVisible(true);
+        panelSupplier.setVisible(false);
+        panelCashier.setVisible(false);
      
        // TODO add your handling code here:
     }//GEN-LAST:event_ButtonTourMitraMousePressed
 
     private void ButtonSupplierMitraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonSupplierMitraMousePressed
-        pt.setVisible(false);
-        ps.setVisible(true);
-        pc.setVisible(false);  
+        panelTour.setVisible(false);
+        panelSupplier.setVisible(true);
+        panelCashier.setVisible(false);  
      
         
          //TODO add your handling code here:
     }//GEN-LAST:event_ButtonSupplierMitraMousePressed
 
     private void ButtonCashierMitraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonCashierMitraMousePressed
-        pt.setVisible(false);
-        ps.setVisible(false);
-        pc.setVisible(true); 
+        panelTour.setVisible(false);
+        panelSupplier.setVisible(false);
+        panelCashier.setVisible(true); 
       
        // TODO add your handling code here:
     }//GEN-LAST:event_ButtonCashierMitraMousePressed

@@ -4,6 +4,11 @@
  */
 package views.MitraMenu;
 
+import dtos.UniverseResponse;
+import dtos.mitra.CreateSupplierDTO;
+import helpers.Message;
+import web.Http;
+
 /**
  *
  * @author Lenovo
@@ -33,10 +38,10 @@ public class AddSupplier extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        jTextField16 = new javax.swing.JTextField();
-        jTextField17 = new javax.swing.JTextField();
-        jTextField18 = new javax.swing.JTextField();
-        jButton6 = new javax.swing.JButton();
+        inputNameSupplier = new javax.swing.JTextField();
+        inputAddressSupplier = new javax.swing.JTextField();
+        inputPhoneSupplier = new javax.swing.JTextField();
+        saveSupplier = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,7 +77,12 @@ public class AddSupplier extends javax.swing.JFrame {
 
         jLabel28.setText("Telephone");
 
-        jButton6.setText("SIMPAN");
+        saveSupplier.setText("SIMPAN");
+        saveSupplier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveSupplierActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -83,7 +93,7 @@ public class AddSupplier extends javax.swing.JFrame {
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGap(156, 156, 156)
-                        .addComponent(jButton6))
+                        .addComponent(saveSupplier))
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,12 +104,12 @@ public class AddSupplier extends javax.swing.JFrame {
                                     .addComponent(jLabel27, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGap(6, 6, 6)
                                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField16)
-                                    .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(inputNameSupplier)
+                                    .addComponent(inputAddressSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                                 .addComponent(jLabel28)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(inputPhoneSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(64, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
@@ -109,17 +119,17 @@ public class AddSupplier extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26)
-                    .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inputNameSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel27)
-                    .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inputAddressSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
-                    .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inputPhoneSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton6)
+                .addComponent(saveSupplier)
                 .addGap(0, 77, Short.MAX_VALUE))
         );
 
@@ -142,6 +152,34 @@ public class AddSupplier extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void saveSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSupplierActionPerformed
+        // TODO add your handling code here:
+        String name = inputNameSupplier.getText();
+        String address = inputAddressSupplier.getText();
+        String phone = inputPhoneSupplier.getText();
+
+        Http http = new Http();
+        UniverseResponse response = http.post("suppliers", CreateSupplierDTO.builder()
+                .name(name)
+                .address(address)
+                .phone(phone).build(),
+                UniverseResponse.class
+        );
+        
+        if(http.isSuccess()){
+            (new Mitra()).setVisible(true);
+            this.setVisible(false);
+        }
+        else{
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("Error:\n");
+            for(String error : response.errors) {
+                stringBuilder.append(error+"\n");
+            }
+            Message.error(stringBuilder.toString(), "Error");
+        }
+    }//GEN-LAST:event_saveSupplierActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,15 +217,15 @@ public class AddSupplier extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton6;
+    private javax.swing.JTextField inputAddressSupplier;
+    private javax.swing.JTextField inputNameSupplier;
+    private javax.swing.JTextField inputPhoneSupplier;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
+    private javax.swing.JButton saveSupplier;
     // End of variables declaration//GEN-END:variables
 }
