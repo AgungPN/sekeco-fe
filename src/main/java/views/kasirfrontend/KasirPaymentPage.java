@@ -1,8 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package views.kasirfrontend;
+
+import dtos.order.OrderApi;
+import dtos.order.OrderRequest;
+import helpers.Message;
+import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRException;
+import print.ReportManager;
+import web.Http;
 
 /**
  *
@@ -10,12 +16,27 @@ package views.kasirfrontend;
  */
 public class KasirPaymentPage extends javax.swing.JFrame {
 
-    /**
-     * Creates new form KasirPaymentPage
-     */
-    public KasirPaymentPage() {
+    OrderRequest orderRequest;
+    public KasirPaymentPage(OrderRequest order) {
         initComponents();
-         setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
+        tf_totalItem.setText(String.valueOf(order.getTotalItems()));
+        tf_total.setText(String.valueOf(order.getTotalPrice()));
+        orderRequest = order;
+        compileReport();
+    }
+
+    KasirPaymentPage() {
+        initComponents();
+        compileReport();
+    }
+    
+    private void compileReport(){
+        try {
+            ReportManager.getInstance().compileReport();
+        } catch (Exception e) {
+            Message.error(e.getMessage(), "Error");
+        }
     }
 
     /**
@@ -33,8 +54,8 @@ public class KasirPaymentPage extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        tfTotalItemBayar = new javax.swing.JTextField();
-        tfSubTotalBayar = new javax.swing.JTextField();
+        tf_totalItem = new javax.swing.JTextField();
+        tf_total = new javax.swing.JTextField();
         tfDiskon = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -123,9 +144,9 @@ public class KasirPaymentPage extends javax.swing.JFrame {
 
         jLabel9.setText("Kembalian ");
 
-        tfJumlahBayar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfJumlahBayarActionPerformed(evt);
+        tfJumlahBayar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfJumlahBayarKeyPressed(evt);
             }
         });
 
@@ -170,9 +191,9 @@ public class KasirPaymentPage extends javax.swing.JFrame {
                                     .addComponent(jLabel4))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfTotalItemBayar)
+                                    .addComponent(tf_totalItem)
                                     .addComponent(tfDiskon)
-                                    .addComponent(tfSubTotalBayar)))
+                                    .addComponent(tf_total)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,11 +222,11 @@ public class KasirPaymentPage extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(tfTotalItemBayar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_totalItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(tfSubTotalBayar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -257,17 +278,33 @@ public class KasirPaymentPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfGrandTotalActionPerformed
 
-    private void tfJumlahBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfJumlahBayarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfJumlahBayarActionPerformed
-
     private void tfKembalianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKembalianActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfKembalianActionPerformed
 
     private void btnCetakStrukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakStrukActionPerformed
-        this.dispose();// TODO add your handling code here:
+         Http http = new Http();
+        OrderApi orderApi = http.post("orders/save", orderRequest, OrderApi.class);
+        try {
+            ReportManager.getInstance().printReportPayment(orderApi.getData());
+        } catch (JRException ex) {
+            Logger.getLogger(KasirPaymentPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
     }//GEN-LAST:event_btnCetakStrukActionPerformed
+
+    private void tfJumlahBayarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfJumlahBayarKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            Long refund = Long.parseLong(tfJumlahBayar.getText()) - Long.parseLong(tf_total.getText());
+            if(refund >= 0L){
+                tfKembalian.setText(String.valueOf(refund));   
+                orderRequest.setAmount(Long.parseLong(tfJumlahBayar.getText()));
+                orderRequest.setRefund(refund);
+            }else{
+                Message.error("Uang Tidak Cukup!!", "Error");
+            }
+        }
+    }//GEN-LAST:event_tfJumlahBayarKeyPressed
 
     /**
      * @param args the command line arguments
@@ -324,7 +361,7 @@ public class KasirPaymentPage extends javax.swing.JFrame {
     private javax.swing.JTextField tfGrandTotal;
     private javax.swing.JTextField tfJumlahBayar;
     private javax.swing.JTextField tfKembalian;
-    private javax.swing.JTextField tfSubTotalBayar;
-    private javax.swing.JTextField tfTotalItemBayar;
+    private javax.swing.JTextField tf_total;
+    private javax.swing.JTextField tf_totalItem;
     // End of variables declaration//GEN-END:variables
 }
