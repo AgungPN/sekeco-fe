@@ -15,6 +15,8 @@ import javax.swing.table.DefaultTableModel;
 import dtos.product.ProductsApi;
 import java.util.ArrayList;
 import java.util.List;
+
+import helpers.Auth;
 import web.Http;
 
 public class HomePageKasir extends javax.swing.JFrame {
@@ -82,6 +84,8 @@ public class HomePageKasir extends javax.swing.JFrame {
                 products.getData().getPrice(),
                 products.getData().getPrice()
             });
+            
+            
         }
         tb_order.setModel(list);
     }
@@ -156,7 +160,7 @@ public class HomePageKasir extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btn_delete = new javax.swing.JButton();
         BtnBayar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         GrandTotal = new javax.swing.JLabel();
@@ -240,6 +244,8 @@ public class HomePageKasir extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageFolder/logout.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -271,14 +277,15 @@ public class HomePageKasir extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("Total :");
 
-        jButton1.setText("Hapus");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageFolder/delete.png"))); // NOI18N
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_deleteActionPerformed(evt);
             }
         });
 
-        BtnBayar.setText("Bayar");
+        BtnBayar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageFolder/payment.png"))); // NOI18N
+        BtnBayar.setPreferredSize(new java.awt.Dimension(55, 55));
         BtnBayar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnBayarActionPerformed(evt);
@@ -315,9 +322,9 @@ public class HomePageKasir extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(BtnBayar)
+                .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnBayar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -329,7 +336,7 @@ public class HomePageKasir extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnBayar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -373,9 +380,9 @@ public class HomePageKasir extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }
 
     private void BtnBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBayarActionPerformed
         int totalItem = 0;
@@ -447,8 +454,8 @@ public class HomePageKasir extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBayar;
     private javax.swing.JLabel GrandTotal;
+    private javax.swing.JButton btn_delete;
     private javax.swing.JComboBox<String> cb_selectTour;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
