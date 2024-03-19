@@ -18,11 +18,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="ActionEdit" min="-2" pref="34" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="ActionCancel" min="-2" pref="34" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="ActionConfirm" min="-2" pref="34" max="-2" attributes="0"/>
+              <Component id="btnHapusKolom" min="-2" pref="31" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -31,35 +27,17 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="ActionCancel" min="-2" pref="34" max="-2" attributes="0"/>
-                  <Component id="ActionConfirm" min="-2" pref="34" max="-2" attributes="0"/>
-                  <Component id="ActionEdit" min="-2" pref="34" max="-2" attributes="0"/>
-              </Group>
+              <Component id="btnHapusKolom" min="-2" pref="30" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="Action.ActionButton" name="ActionEdit">
+    <Component class="views.kasirfrontend.ActionButton" name="btnHapusKolom">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Action/icons8-edit-row-25.png"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="Action.ActionButton" name="ActionConfirm">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Action/icons8-tick-25.png"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="Action.ActionButton" name="ActionCancel">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Action/icons8-x-25.png"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.ImageIcon(System.getProperty(&quot;user.dir&quot;) + &quot;\\src\\main\\java\\ImageFolder\\actionHapus.png&quot;)" type="code"/>
         </Property>
       </Properties>
     </Component>

@@ -35,8 +35,8 @@ public class PanelTour extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         TableMitraTour = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        TombolTourAnyar = new javax.swing.JButton();
+        btnSearchTour = new javax.swing.JButton();
+        btnAddTour = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(217, 217, 217));
 
@@ -64,17 +64,22 @@ public class PanelTour extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(TableMitraTour);
 
-        jButton2.setText("Search");
-
-        TombolTourAnyar.setText("Add Tour");
-        TombolTourAnyar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                TombolTourAnyarMousePressed(evt);
+        btnSearchTour.setText("Search");
+        btnSearchTour.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchTourActionPerformed(evt);
             }
         });
-        TombolTourAnyar.addActionListener(new java.awt.event.ActionListener() {
+
+        btnAddTour.setText("Add Tour");
+        btnAddTour.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnAddTourMousePressed(evt);
+            }
+        });
+        btnAddTour.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TombolTourAnyarActionPerformed(evt);
+                btnAddTourActionPerformed(evt);
             }
         });
 
@@ -87,11 +92,11 @@ public class PanelTour extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(TombolTourAnyar, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAddTour, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
+                        .addComponent(btnSearchTour)
                         .addGap(3, 3, 3)))
                 .addContainerGap())
         );
@@ -101,36 +106,39 @@ public class PanelTour extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2)
-                    .addComponent(TombolTourAnyar))
+                    .addComponent(btnSearchTour)
+                    .addComponent(btnAddTour))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
                 .addGap(21, 21, 21))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TombolTourAnyarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TombolTourAnyarActionPerformed
+    private void btnAddTourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTourActionPerformed
     AddTour addTour = new AddTour();
     addTour.setVisible(true);
-    }//GEN-LAST:event_TombolTourAnyarActionPerformed
+    }//GEN-LAST:event_btnAddTourActionPerformed
 
-    private void TombolTourAnyarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TombolTourAnyarMousePressed
-// Membuat objek dari kelas AddNewTour
-       // Membuat objek dari kelas AddNewTour
-   
-   
-    
-    // Menyembunyikan panel-panel lain
-    PanelMitraBox.panelTour.setVisible(false);
+    private void btnAddTourMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddTourMousePressed
+if (PanelMitraBox != null) {
+    PanelMitraBox.panelCashier.setVisible(false);
     PanelMitraBox.panelSupplier.setVisible(false);
-     PanelMitraBox.panelCashier.setVisible(false);
-    }//GEN-LAST:event_TombolTourAnyarMousePressed
+    PanelMitraBox.panelTour.setVisible(false);
+} else {
+    System.err.println("PanelMitraBox belum diinisialisasi!");
+}
+
+    }//GEN-LAST:event_btnAddTourMousePressed
+
+    private void btnSearchTourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchTourActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearchTourActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TableMitraTour;
-    private javax.swing.JButton TombolTourAnyar;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnAddTour;
+    private javax.swing.JButton btnSearchTour;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
