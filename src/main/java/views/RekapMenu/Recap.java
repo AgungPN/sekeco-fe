@@ -13,9 +13,6 @@ import views.superkasirfrontend.DsbSAdmin;
  */
 public class Recap extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Recap
-     */
     public Recap() {
         initComponents();
         setLocationRelativeTo(null);

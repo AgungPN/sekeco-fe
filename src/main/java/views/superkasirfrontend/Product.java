@@ -1,12 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package views.superkasirfrontend;
 
 
+import dtos.product.ProductsPagination;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
+import web.Http;
 
 
 /**
@@ -21,31 +19,31 @@ public class Product extends javax.swing.JFrame {
     public Product() {
         initComponents();
         setTable();
-         setLocationRelativeTo(null);
-         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     public void setTable() {
-       // Http http = new Http();
-       // Products products = http.sendGetRequest("products", Products.class);
+        Http http = new Http();
+        ProductsPagination products = http.sendGetRequest("products", ProductsPagination.class);
 
-        // Example set table from data API
-        //String[] fields = new String [] {
-          //      "No", "Barcode", "Nama Barang", "Harga Beli", "Harga Jual", "Profit Sharing Amount", "Stok"};
-       // DefaultTableModel list = new DefaultTableModel(null, fields);
-       // for (dtos.product.Product product : products.getContent()) {
-       //     list.addRow(new Object[]{
-        //            product.getProductId(),
-          //          product.getBarcode(),
-          //          product.getName(),
-          //          product.getPrice(),
-          //          product.getPrice(), //TODO : tambahkan harga beli
-          ////          product.getProfitSharingAmount(),
-          //          product.getStock()
+//         Example set table from data API
+        String[] fields = new String [] {
+                "No", "Barcode", "Nama Barang", "Harga Beli", "Harga Jual", "Profit Sharing Amount", "Stok"};
+        DefaultTableModel list = new DefaultTableModel(null, fields);
+        for (dtos.product.Product product : products.getContent()) {
+            list.addRow(new Object[]{
+                    product.getProductId(),
+                    product.getBarcode(),
+                    product.getName(),
+                    product.getPrice(),
+                    product.getPrice(), //TODO : tambahkan harga beli
+                    product.getProfitSharingAmount(),
+                    product.getStock()
                     
-          //  });
-        //}
-        //tableProduct.setModel(list);
+            });
+        }
+        tableProduct.setModel(list);
     }
     /**
      * This method is called from within the constructor to initialize the form.

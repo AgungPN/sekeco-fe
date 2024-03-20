@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package views.kasirfrontend;
 
 import java.awt.event.ActionEvent;
@@ -17,14 +13,11 @@ import dtos.product.Product;
 import dtos.product.ProductsApi;
 import java.awt.event.KeyEvent;
 import java.util.Calendar;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import views.auth.Login;
 import web.Http;
 
-/**
- *
- * @author Lenovo
- */
 public class HomePageKasir extends javax.swing.JFrame {
 
     String[] fields;
@@ -33,6 +26,7 @@ public class HomePageKasir extends javax.swing.JFrame {
     List<InvoiceTour> invoiceTourList = new ArrayList<>();
     public HomePageKasir() {
        initComponents();
+      setExtendedState(JFrame.MAXIMIZED_BOTH);
        fields = new String[]{"Barcode", "Nama Barang", "Qty", "Harga","Sub Total", "Aksi"};
        list = new DefaultTableModel(null, fields);
        cb_selectTour.addItem("Person");
