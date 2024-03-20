@@ -20,6 +20,70 @@ public class Recap extends javax.swing.JFrame {
     public Recap() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        addDataPurchase();
+        addDataOrder();
+        addDataInvoice();
+    }
+    
+    private void addDataPurchase(){
+        Http http = new Http();
+        PurchaseApi purchases = http.sendGetRequest("recap/purchase", PurchaseApi.class);
+        
+        String[] field = new String[]{"No", "Supplier Name", "Total Item", "Total Price", "Amount"};
+        DefaultTableModel tableModel = new DefaultTableModel(null, field);
+        int i = 0;
+        for(Purchase purchase : purchases.getContent()){
+            tableModel.addRow(new Object[]{
+                i,
+                purchase.getSupplier().getName(),
+                purchase.getTotalItems(),
+                purchase.getTotalPrice(),
+                purchase.getAmount()
+            });
+            i++;
+        }
+        tbPurchase.setModel(tableModel);
+    }
+    private void addDataOrder(){
+        Http http = new Http();
+        OrderPagination order = http.sendGetRequest("recap/order", OrderPagination.class);
+        
+        String[] field = new String[]{"No", "Cashier", "Tour", "Total Items", "Total Price", "Amount", "refund"};
+        DefaultTableModel tableModel = new DefaultTableModel(null, field);
+        int i = 0;
+        for(OrderResponse orderResponse : order.getContent()){
+            tableModel.addRow(new Object[]{
+                i,
+                orderResponse.getUserId().getUsername(),
+                orderResponse.getInvoiceTourId().getTourId().getName(),
+                orderResponse.getTotalItems(),
+                orderResponse.getTotalPrice(),
+                orderResponse.getAmount(),
+                orderResponse.getRefund()
+            });
+            i++;
+        }
+        tbOrder.setModel(tableModel);
+    }
+    private void addDataInvoice(){
+        Http http = new Http();
+        InvoiceTourPagination tourPagination = http.sendGetRequest("recap/invoice", InvoiceTourPagination.class);
+        
+        String[] field = new String[]{"No", "Tour", "Unit Bus", "Income", "Employee", "Status"};
+        DefaultTableModel tableModel = new DefaultTableModel(null, field);
+        int i = 0;
+        for(InvoiceTour invoiceTour : tourPagination.getContent()){
+            tableModel.addRow(new Object[]{
+                i,
+                invoiceTour.getTourId().getName(),
+                invoiceTour.getUnitBus(),
+                invoiceTour.getIncome(),
+                invoiceTour.getEmployee(),
+                invoiceTour.getStatus()
+            });
+            i++;
+        }
+        tbInvoice.setModel(tableModel);
     }
 
     @SuppressWarnings("unchecked")
@@ -192,8 +256,8 @@ public class Recap extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         tpRecap.addTab("Purchase", pnlPurchase);
@@ -292,8 +356,8 @@ public class Recap extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         tpRecap.addTab("Order", pnlOrder);
@@ -425,66 +489,16 @@ public class Recap extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void pnlPurchaseFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pnlPurchaseFocusGained
-        Http http = new Http();
-        PurchaseApi purchases = http.sendGetRequest("recap/purchase", PurchaseApi.class);
         
-        String[] field = new String[]{"No", "Supplier Name", "Total Item", "Total Price", "Amount"};
-        DefaultTableModel tableModel = new DefaultTableModel(null, field);
-        int i = 0;
-        for(Purchase purchase : purchases.getContent()){
-            tableModel.addRow(new Object[]{
-                i,
-                purchase.getSupplier().getName(),
-                purchase.getTotalItems(),
-                purchase.getTotalPrice(),
-                purchase.getAmount()
-            });
-            i++;
-        }
-        tbPurchase.setModel(tableModel);
     }//GEN-LAST:event_pnlPurchaseFocusGained
 
     private void pnlOrderFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pnlOrderFocusGained
-        Http http = new Http();
-        OrderPagination order = http.sendGetRequest("recap/order", OrderPagination.class);
         
-        String[] field = new String[]{"No", "Cashier", "Tour", "Total Items", "Total Price", "Amount", "refund"};
-        DefaultTableModel tableModel = new DefaultTableModel(null, field);
-        int i = 0;
-        for(OrderResponse orderResponse : order.getContent()){
-            tableModel.addRow(new Object[]{
-                i,
-                orderResponse.getUserId().getUsername(),
-                orderResponse.getInvoiceTourId().getTourId().getName(),
-                orderResponse.getTotalItems(),
-                orderResponse.getTotalPrice(),
-                orderResponse.getAmount(),
-                orderResponse.getRefund()
-            });
-            i++;
-        }
-        tbOrder.setModel(tableModel);
+        
     }//GEN-LAST:event_pnlOrderFocusGained
 
     private void pnlInvoiceFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pnlInvoiceFocusGained
-        Http http = new Http();
-        InvoiceTourPagination tourPagination = http.sendGetRequest("recap/invoice", InvoiceTourPagination.class);
         
-        String[] field = new String[]{"No", "Tour", "Unit Bus", "Income", "Employee", "Status"};
-        DefaultTableModel tableModel = new DefaultTableModel(null, field);
-        int i = 0;
-        for(InvoiceTour invoiceTour : tourPagination.getContent()){
-            tableModel.addRow(new Object[]{
-                i,
-                invoiceTour.getTourId().getName(),
-                invoiceTour.getUnitBus(),
-                invoiceTour.getIncome(),
-                invoiceTour.getEmployee(),
-                invoiceTour.getStatus()
-            });
-            i++;
-        }
-        tbInvoice.setModel(tableModel);
     }//GEN-LAST:event_pnlInvoiceFocusGained
 
     public static void main(String args[]) {
