@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package views.kasirfrontend;
 
 import java.awt.event.ActionEvent;
@@ -10,21 +6,18 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import dtos.invoiceTour.InvoiceTour;
-import dtos.invoiceTour.InvoiceTours;
+import dtos.invoiceTour.InvoiceTourApi;
 import dtos.order.OrderDetailsRequest;
 import dtos.order.OrderRequest;
 import dtos.product.Product;
 import dtos.product.ProductsApi;
 import java.awt.event.KeyEvent;
 import java.util.Calendar;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import views.auth.Login;
 import web.Http;
 
-/**
- *
- * @author Lenovo
- */
 public class HomePageKasir extends javax.swing.JFrame {
 
     String[] fields;
@@ -33,6 +26,7 @@ public class HomePageKasir extends javax.swing.JFrame {
     List<InvoiceTour> invoiceTourList = new ArrayList<>();
     public HomePageKasir() {
        initComponents();
+      setExtendedState(JFrame.MAXIMIZED_BOTH);
        fields = new String[]{"Barcode", "Nama Barang", "Qty", "Harga","Sub Total", "Aksi"};
        list = new DefaultTableModel(null, fields);
        cb_selectTour.addItem("Person");
@@ -42,7 +36,7 @@ public class HomePageKasir extends javax.swing.JFrame {
     
     private void cb_tour(){
         Http http = new Http();
-        InvoiceTours invoiceTours = http.sendGetRequest("invoice/tour/status?status=NOW", InvoiceTours.class);
+        InvoiceTourApi invoiceTours = http.sendGetRequest("invoice/tour/status?status=NOW", InvoiceTourApi.class);
         for(InvoiceTour invoiceTour : invoiceTours.getData()){
             invoiceTourList.add(invoiceTour);
             cb_selectTour.addItem(invoiceTour.getTourId().getName());

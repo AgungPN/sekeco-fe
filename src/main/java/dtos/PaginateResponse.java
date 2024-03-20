@@ -4,10 +4,6 @@
  */
 package dtos;
 
-/**
- *
- * @author Lenovo
- */
 public class PaginateResponse {
     
 }

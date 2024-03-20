@@ -8,6 +8,6 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class InvoiceTours extends ApiResponse {
+public class InvoiceTourApi extends ApiResponse {
     private List<InvoiceTour> data;
 }

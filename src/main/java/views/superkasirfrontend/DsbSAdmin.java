@@ -5,7 +5,6 @@
 package views.superkasirfrontend;
 
 import views.MitraMenu.Mitra;
-import views.RekapMenu.Recap;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
@@ -13,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.Timer;
+import views.RekapMenu.Recap;
 import views.auth.Login;
 
 
