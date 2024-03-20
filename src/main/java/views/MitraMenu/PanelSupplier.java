@@ -1,16 +1,32 @@
 package views.MitraMenu;
 
+import dtos.UniverseResponse;
+import dtos.mitra.CreateSupplierDTO;
 import dtos.supplier.Supplier;
 import dtos.supplier.Suppliers;
+import helpers.Message;
 import web.Http;
 
 import javax.swing.table.DefaultTableModel;
 
 public class PanelSupplier extends javax.swing.JPanel {
 
+    private Mitra mitra;
+
     public PanelSupplier() {
         initComponents();
         setTable();
+    }
+
+    public PanelSupplier(Mitra mitra) {
+        initComponents();
+        setTable();
+        this.mitra = mitra;
+    }
+
+    public Long getSupplierSelectedId() {
+        int row = jTable1.getSelectedRow();
+        return (Long) jTable1.getValueAt(row, 0);
     }
 
     public void setTable() {
@@ -18,16 +34,17 @@ public class PanelSupplier extends javax.swing.JPanel {
         Suppliers suppliers = http.sendGetRequest("suppliers", Suppliers.class);
         setTable(suppliers);
     }
+
     public void setTable(Suppliers suppliers) {
         // Example set table from data API
         String[] fields = new String[]{"Supplier_Id", "Name", "Addres", "Telephone"};
         DefaultTableModel list = new DefaultTableModel(null, fields);
         for (Supplier supplier : suppliers.getContent()) {
             list.addRow(new Object[]{
-                    supplier.getSupplierId(),
-                    supplier.getName(),
-                    supplier.getAddress(),
-                    supplier.getPhone()
+                supplier.getSupplierId(),
+                supplier.getName(),
+                supplier.getAddress(),
+                supplier.getPhone()
             });
         }
         jTable1.setModel(list);
@@ -47,6 +64,10 @@ public class PanelSupplier extends javax.swing.JPanel {
         btnSearch = new javax.swing.JButton();
         searchSupplier = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(217, 217, 217));
 
@@ -88,21 +109,53 @@ public class PanelSupplier extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setText("Previous");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Next");
+
+        btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(56, 56, 56)
+                .addComponent(jButton2)
+                .addGap(247, 247, 247))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
-                        .addComponent(searchSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSearch)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
+                        .addComponent(searchSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSearch)
+                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,28 +165,69 @@ public class PanelSupplier extends javax.swing.JPanel {
                     .addComponent(btnSearch)
                     .addComponent(searchSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
-                .addGap(19, 19, 19))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(btnEdit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnDelete)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addGap(0, 15, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
         Http http = new Http();
-        Suppliers suppliers = http.sendGetRequest("suppliers?search="+searchSupplier.getText(), Suppliers.class);
+        Suppliers suppliers = http.sendGetRequest("suppliers?search=" + searchSupplier.getText(), Suppliers.class);
         setTable(suppliers);
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // Inisialisasi frame KasirPaymentPage dan tampilkan
-        AddSupplier addSupplier = new AddSupplier();
-        addSupplier.setVisible(true);      // TODO add your handling code here:
+        AddSupplier addSupplier = new AddSupplier(mitra);
+        addSupplier.setVisible(true);
+// TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        Long supplierId = getSupplierSelectedId();
+        Http http = new Http();
+        UniverseResponse response = http.delete("suppliers/"+ Long.toString(supplierId), UniverseResponse.class);
+        
+        if(http.isSuccess()){
+            this.mitra.dispose();
+            Mitra newMitra = new Mitra();
+            newMitra.setVisible(true);
+            newMitra.openSupplier();
+            this.setVisible(false);
+            
+        } else {
+            Message.errors(response.errors);
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
