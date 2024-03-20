@@ -50,11 +50,10 @@ public class Http {
         return convertResponseToObject(clazz, client, request);
     }
 
-    public <T> T delete(String pathURL, Object obj, Class<T> clazz) {
+    public <T> T delete(String pathURL, Class<T> clazz) {
         HttpClient client = HttpClient.newHttpClient();
 
         // convert object to JSON string
-        String requestJson = new Gson().toJson(obj);
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(baseURL + pathURL))
                 .header("Content-Type", "application/json")

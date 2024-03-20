@@ -15,36 +15,34 @@ public class Mitra extends javax.swing.JFrame {
     /**
      * Creates new form Mitra
      */
-    
     PanelTour panelTour;
     PanelSupplier panelSupplier;
     PanelCashier panelCashier;
-    
+
     public Mitra() {
         initComponents();
-         setLocationRelativeTo(null);
-        
+        setLocationRelativeTo(null);
 
         panelTour = new PanelTour();
-        panelSupplier = new PanelSupplier();
+        panelSupplier = new PanelSupplier(this);
         panelCashier = new PanelCashier();
-       
-        
-        
+
         PanelMitraBox.add(panelTour);
         PanelMitraBox.add(panelSupplier);
         PanelMitraBox.add(panelCashier);
-     
-        
+
         panelTour.setVisible(false);
         panelSupplier.setVisible(false);
         panelCashier.setVisible(false);
-        
-        
-        
-        
+
     }
-    
+
+    public void openSupplier() {
+        panelTour.setVisible(false);
+        panelSupplier.setVisible(true);
+        panelCashier.setVisible(false);
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -190,32 +188,28 @@ public class Mitra extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonSupplierMitraActionPerformed
 
     private void ButtonTourMitraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonTourMitraActionPerformed
-      // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_ButtonTourMitraActionPerformed
 
     private void ButtonTourMitraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonTourMitraMousePressed
         panelTour.setVisible(true);
         panelSupplier.setVisible(false);
         panelCashier.setVisible(false);
-     
-       // TODO add your handling code here:
+
+        // TODO add your handling code here:
     }//GEN-LAST:event_ButtonTourMitraMousePressed
 
     private void ButtonSupplierMitraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonSupplierMitraMousePressed
-        panelTour.setVisible(false);
-        panelSupplier.setVisible(true);
-        panelCashier.setVisible(false);
-     
-        
-         //TODO add your handling code here:
+        openSupplier();
+        //TODO add your handling code here:
     }//GEN-LAST:event_ButtonSupplierMitraMousePressed
 
     private void ButtonCashierMitraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonCashierMitraMousePressed
         panelTour.setVisible(false);
         panelSupplier.setVisible(false);
         panelCashier.setVisible(true);
-      
-       // TODO add your handling code here:
+
+        // TODO add your handling code here:
     }//GEN-LAST:event_ButtonCashierMitraMousePressed
 
     private void ButtonCashierMitraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCashierMitraActionPerformed
@@ -224,12 +218,12 @@ public class Mitra extends javax.swing.JFrame {
 
     private void DashboardReverseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DashboardReverseBtnActionPerformed
         DsbSAdmin dsbSAdminFrame = new DsbSAdmin();
-    
-    // Menampilkan frame DsbSAdmin
-    dsbSAdminFrame.setVisible(true);
-    
-    // Menutup frame Mitra
-    dispose();
+
+        // Menampilkan frame DsbSAdmin
+        dsbSAdminFrame.setVisible(true);
+
+        // Menutup frame Mitra
+        dispose();
     }//GEN-LAST:event_DashboardReverseBtnActionPerformed
 
     /**
