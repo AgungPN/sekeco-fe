@@ -8,5 +8,4 @@ public class ApiResponse {
     protected String message;
     protected int status;
     public List<String> errors;
-    // TODO: in extends, add attributes data
 }

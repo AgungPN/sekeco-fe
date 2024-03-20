@@ -6,7 +6,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import dtos.invoiceTour.InvoiceTour;
-import dtos.invoiceTour.InvoiceTours;
+import dtos.invoiceTour.InvoiceTourApi;
 import dtos.order.OrderDetailsRequest;
 import dtos.order.OrderRequest;
 import dtos.product.Product;
@@ -36,7 +36,7 @@ public class HomePageKasir extends javax.swing.JFrame {
     
     private void cb_tour(){
         Http http = new Http();
-        InvoiceTours invoiceTours = http.sendGetRequest("invoice/tour/status?status=NOW", InvoiceTours.class);
+        InvoiceTourApi invoiceTours = http.sendGetRequest("invoice/tour/status?status=NOW", InvoiceTourApi.class);
         for(InvoiceTour invoiceTour : invoiceTours.getData()){
             invoiceTourList.add(invoiceTour);
             cb_selectTour.addItem(invoiceTour.getTourId().getName());
