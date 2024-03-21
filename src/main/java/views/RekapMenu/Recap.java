@@ -2,11 +2,11 @@ package views.RekapMenu;
 
 import dtos.invoiceTour.InvoiceTour;
 import dtos.invoiceTour.InvoiceTourPagination;
-import dtos.order.OrderApi;
 import dtos.order.OrderPagination;
 import dtos.order.OrderResponse;
 import dtos.purchase.Purchase;
 import dtos.purchase.PurchaseApi;
+import helpers.Message;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import views.superkasirfrontend.DsbSAdmin;
@@ -14,9 +14,6 @@ import web.Http;
 
 public class Recap extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Recap
-     */
     public Recap() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -31,18 +28,23 @@ public class Recap extends javax.swing.JFrame {
         
         String[] field = new String[]{"No", "Supplier Name", "Total Item", "Total Price", "Amount"};
         DefaultTableModel tableModel = new DefaultTableModel(null, field);
-        int i = 0;
-        for(Purchase purchase : purchases.getContent()){
-            tableModel.addRow(new Object[]{
-                i,
-                purchase.getSupplier().getName(),
-                purchase.getTotalItems(),
-                purchase.getTotalPrice(),
-                purchase.getAmount()
-            });
-            i++;
+        if(purchases.getContent() != null){
+            int i = 1;
+            for(Purchase purchase : purchases.getContent()){
+                tableModel.addRow(new Object[]{
+                    i,
+                    purchase.getSupplier().getName(),
+                    purchase.getTotalItems(),
+                    purchase.getTotalPrice(),
+                    purchase.getAmount()
+                });
+                i++;
+            }
+            tbPurchase.setModel(tableModel);
+        }else{
+            Message.information("Data Purchase Kosong", "Purchase Info");
         }
-        tbPurchase.setModel(tableModel);
+        
     }
     private void addDataOrder(){
         Http http = new Http();
@@ -50,20 +52,24 @@ public class Recap extends javax.swing.JFrame {
         
         String[] field = new String[]{"No", "Cashier", "Tour", "Total Items", "Total Price", "Amount", "refund"};
         DefaultTableModel tableModel = new DefaultTableModel(null, field);
-        int i = 0;
-        for(OrderResponse orderResponse : order.getContent()){
-            tableModel.addRow(new Object[]{
-                i,
-                orderResponse.getUserId().getUsername(),
-                orderResponse.getInvoiceTourId().getTourId().getName(),
-                orderResponse.getTotalItems(),
-                orderResponse.getTotalPrice(),
-                orderResponse.getAmount(),
-                orderResponse.getRefund()
-            });
-            i++;
+        if(order.getContent() != null){
+            int i = 1;
+            for(OrderResponse orderResponse : order.getContent()){
+                tableModel.addRow(new Object[]{
+                    i,
+                    orderResponse.getUserId().getUsername(),
+                    orderResponse.getInvoiceTourId().getTourId().getName(),
+                    orderResponse.getTotalItems(),
+                    orderResponse.getTotalPrice(),
+                    orderResponse.getAmount(),
+                    orderResponse.getRefund()
+                });
+                i++;
+            }
+            tbOrder.setModel(tableModel);
+        }else{
+            Message.information("Data Order Kosong", "Order Info");
         }
-        tbOrder.setModel(tableModel);
     }
     private void addDataInvoice(){
         Http http = new Http();
@@ -71,19 +77,23 @@ public class Recap extends javax.swing.JFrame {
         
         String[] field = new String[]{"No", "Tour", "Unit Bus", "Income", "Employee", "Status"};
         DefaultTableModel tableModel = new DefaultTableModel(null, field);
-        int i = 0;
-        for(InvoiceTour invoiceTour : tourPagination.getContent()){
-            tableModel.addRow(new Object[]{
-                i,
-                invoiceTour.getTourId().getName(),
-                invoiceTour.getUnitBus(),
-                invoiceTour.getIncome(),
-                invoiceTour.getEmployee(),
-                invoiceTour.getStatus()
-            });
-            i++;
+        if(tourPagination.getContent() != null){
+            int i = 1;
+            for(InvoiceTour invoiceTour : tourPagination.getContent()){
+                tableModel.addRow(new Object[]{
+                    i,
+                    invoiceTour.getTourId().getName(),
+                    invoiceTour.getUnitBus(),
+                    invoiceTour.getIncome(),
+                    invoiceTour.getEmployee(),
+                    invoiceTour.getStatus()
+                });
+                i++;
+            }
+            tbInvoice.setModel(tableModel);
+        }else{
+            Message.information("Data Invoice Tour Kosong", "Invoice Tour Info");
         }
-        tbInvoice.setModel(tableModel);
     }
 
     @SuppressWarnings("unchecked")
@@ -271,16 +281,16 @@ public class Recap extends javax.swing.JFrame {
 
         tbOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
         tbOrder.setPreferredSize(new java.awt.Dimension(525, 140));
@@ -371,16 +381,16 @@ public class Recap extends javax.swing.JFrame {
 
         tbInvoice.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {},
-                {},
-                {},
-                {}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
         jScrollPane3.setViewportView(tbInvoice);
