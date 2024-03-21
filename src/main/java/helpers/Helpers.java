@@ -35,4 +35,20 @@ public class Helpers {
         }
         return -1;
     }
+
+    public static Long convertToLong(String str){
+        try {
+            return Long.parseLong(str);
+        } catch (NumberFormatException e) {
+            return 0L;
+        }
+    }
+
+    public static int convertToInt(String str){
+        try {
+            return Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
 }

@@ -33,7 +33,7 @@ public class Product extends javax.swing.JFrame {
 
 //         Example set table from data API
         String[] fields = new String [] {
-                "No", "Barcode", "Nama Barang", "Harga Beli", "Harga Jual", "Profit Sharing Amount", "Stok"};
+                "No", "Barcode", "Nama Barang",  "Harga Jual", "Profit Sharing Amount", "Stok"};
         DefaultTableModel list = new DefaultTableModel(null, fields);
         for (dtos.product.Product product : products.getContent()) {
             list.addRow(new Object[]{
@@ -41,7 +41,6 @@ public class Product extends javax.swing.JFrame {
                     product.getBarcode(),
                     product.getName(),
                     product.getPrice(),
-                    product.getPrice(), //TODO : tambahkan harga beli
                     product.getProfitSharingAmount(),
                     product.getStock()
                     
