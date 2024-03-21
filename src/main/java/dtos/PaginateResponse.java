@@ -5,5 +5,13 @@
 package dtos;
 
 public class PaginateResponse {
-    
+    protected int totalElements;
+    public int totalPages;
+    protected int size;
+    protected int number;
+    protected int numberOfElements;
+    protected boolean first;
+    protected boolean last;
+    protected boolean empty;
+    // NOTE:  private List<T> content; add this in inherits
 }

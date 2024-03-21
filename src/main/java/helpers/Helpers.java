@@ -1,8 +1,12 @@
 package helpers;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.Map;
 
 public class Helpers {
 
@@ -18,7 +22,7 @@ public class Helpers {
 //        decimalFormatSymbols.setGroupingSeparator('.');
         decimalFormat.setDecimalFormatSymbols(decimalFormatSymbols);
 
-        return "Rp. "+decimalFormat.format(money);
+        return "Rp. " + decimalFormat.format(money);
     }
 
     public static int toInt(String stringNum) {
@@ -36,7 +40,7 @@ public class Helpers {
         return -1;
     }
 
-    public static Long convertToLong(String str){
+    public static Long convertToLong(String str) {
         try {
             return Long.parseLong(str);
         } catch (NumberFormatException e) {
@@ -44,11 +48,26 @@ public class Helpers {
         }
     }
 
-    public static int convertToInt(String str){
+    public static int convertToInt(String str) {
         try {
             return Integer.parseInt(str);
         } catch (NumberFormatException e) {
             return 0;
         }
+    }
+
+    public static String mapToQueryString(Map<String, String> params) {
+        StringBuilder result = new StringBuilder();
+
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            if (result.length() > 0) {
+                result.append("&");
+            }
+            result.append(URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8));
+            result.append("=");
+            result.append(URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8));
+        }
+
+        return result.toString();
     }
 }
