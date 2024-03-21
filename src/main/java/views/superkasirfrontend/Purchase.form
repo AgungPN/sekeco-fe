@@ -313,6 +313,7 @@
         <Component class="javax.swing.JTextField" name="inputAmount">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputAmountActionPerformed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="inputAmountKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="inputRefund">
@@ -527,8 +528,14 @@
             <Component class="javax.swing.JTextField" name="TFName">
             </Component>
             <Component class="javax.swing.JTextField" name="TFPriceBuy">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TFPriceBuyKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="TFPriceSell">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TFPriceSellKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="TFQuantity">
               <Properties>
@@ -538,9 +545,13 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TFQuantityActionPerformed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TFQuantityKeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="TFProfitSAmon">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TFProfitSAmonKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnAddProdNew">
               <Properties>
@@ -737,15 +748,22 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="existingInputPriceBuy">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="existingInputPriceBuyKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="existingInputSell">
             </Component>
             <Component class="javax.swing.JTextField" name="existingInputQuantity">
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="existingInputQuantityActionPerformed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="existingInputQuantityKeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="existingInputProfitSharingAmount">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="existingInputProfitSharingAmountKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnAddProdExisting">
               <Properties>

@@ -261,6 +261,11 @@ public class Purchase extends javax.swing.JFrame {
                 inputAmountActionPerformed(evt);
             }
         });
+        inputAmount.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inputAmountKeyTyped(evt);
+            }
+        });
 
         inputRefund.setEnabled(false);
 
@@ -391,10 +396,33 @@ public class Purchase extends javax.swing.JFrame {
 
         jLabel14.setText("Profit Sharing Amount");
 
+        TFPriceBuy.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TFPriceBuyKeyTyped(evt);
+            }
+        });
+
+        TFPriceSell.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TFPriceSellKeyTyped(evt);
+            }
+        });
+
         TFQuantity.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         TFQuantity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TFQuantityActionPerformed(evt);
+            }
+        });
+        TFQuantity.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TFQuantityKeyTyped(evt);
+            }
+        });
+
+        TFProfitSAmon.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TFProfitSAmonKeyTyped(evt);
             }
         });
 
@@ -507,9 +535,26 @@ public class Purchase extends javax.swing.JFrame {
 
         existingInputName.setEnabled(false);
 
+        existingInputPriceBuy.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                existingInputPriceBuyKeyTyped(evt);
+            }
+        });
+
         existingInputQuantity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 existingInputQuantityActionPerformed(evt);
+            }
+        });
+        existingInputQuantity.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                existingInputQuantityKeyTyped(evt);
+            }
+        });
+
+        existingInputProfitSharingAmount.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                existingInputProfitSharingAmountKeyTyped(evt);
             }
         });
 
@@ -849,6 +894,70 @@ public class Purchase extends javax.swing.JFrame {
     private void inputTotalProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTotalProductActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_inputTotalProductActionPerformed
+
+    private void TFPriceBuyKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TFPriceBuyKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!Character.isDigit(c)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_TFPriceBuyKeyTyped
+
+    private void TFPriceSellKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TFPriceSellKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!Character.isDigit(c)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_TFPriceSellKeyTyped
+
+    private void TFQuantityKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TFQuantityKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!Character.isDigit(c)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_TFQuantityKeyTyped
+
+    private void TFProfitSAmonKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TFProfitSAmonKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!Character.isDigit(c)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_TFProfitSAmonKeyTyped
+
+    private void inputAmountKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputAmountKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!Character.isDigit(c)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_inputAmountKeyTyped
+
+    private void existingInputQuantityKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_existingInputQuantityKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!Character.isDigit(c)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_existingInputQuantityKeyTyped
+
+    private void existingInputPriceBuyKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_existingInputPriceBuyKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!Character.isDigit(c)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_existingInputPriceBuyKeyTyped
+
+    private void existingInputProfitSharingAmountKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_existingInputProfitSharingAmountKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!Character.isDigit(c)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_existingInputProfitSharingAmountKeyTyped
 
     /**
      * @param args the command line arguments

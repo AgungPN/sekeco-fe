@@ -272,7 +272,10 @@ public class Product extends javax.swing.JFrame {
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
-        editProduct editframe = new editProduct();
+        //  get id by seleccted row
+        // get endpoint /products/{idProduct}
+        
+        editProduct editframe = new editProduct(); // kirim data prodcut ketika edit editProduct(product)
         editframe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnEditActionPerformed
