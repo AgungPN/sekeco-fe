@@ -14,4 +14,9 @@ public class Product {
     private Integer stock;
     private Date createdAt;
     private Date updatedAt;
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

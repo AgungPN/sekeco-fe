@@ -26,6 +26,10 @@ public class PanelSupplier extends javax.swing.JPanel {
 
     public Long getSupplierSelectedId() {
         int row = jTable1.getSelectedRow();
+        if(row == -1){
+            Message.error("Pilih baris yang ingin dihapus dulu", "Error");
+            return -1L;
+        }
         return (Long) jTable1.getValueAt(row, 0);
     }
 
@@ -206,6 +210,12 @@ public class PanelSupplier extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         Long supplierId = getSupplierSelectedId();
+        if(supplierId == -1){
+            return;
+        }
+        if(Message.confirm("Yakin ingin menghapus data ini?", "Confirm") != 0){
+            return;
+        }
         Http http = new Http();
         UniverseResponse response = http.delete("suppliers/"+ Long.toString(supplierId), UniverseResponse.class);
         
